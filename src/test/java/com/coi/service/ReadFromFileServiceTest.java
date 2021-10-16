@@ -1,8 +1,9 @@
-package com.coi.utils;
+package com.coi.service;
 
 import com.coi.domain.Customer;
 import com.coi.domain.Product;
 import com.coi.domain.Sale;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -12,20 +13,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class ReadFromFileServiceTest {
+    ReadFromFileService readFromFileService = new ReadFromFileService();
     HashMap<Integer, Customer> customers = new HashMap<>();
     HashMap<Integer, Product> products = new HashMap<>();
     HashMap<Integer, Sale> sales = new HashMap<>();
+
+    @DisplayName("сервис должен читать покупателей из файла")
     @Test
     void readCustomers() {
-        ReadFromFileService.readCustomers(customers);
+        readFromFileService.readCustomers(customers);
         assertAll(() -> assertEquals(new Customer(0, "Сергей", "Сергеев", 800), customers.get(0)),
                 () -> assertEquals(new Customer(1, "Алексей", "Алексеев", 800), customers.get(1)),
                 () -> assertEquals(new Customer(2, "Максим", "Максимов", 200), customers.get(2)));
     }
 
+    @DisplayName("сервис должен читать товары из файла")
     @Test
     void readProducts() {
-        ReadFromFileService.readProducts(products);
+        readFromFileService.readProducts(products);
         assertAll(() -> assertEquals(new Product(0, "Молоко", 60, 10), products.get(0)),
                 () -> assertEquals(new Product(1, "Огурцы", 80, 20), products.get(1)),
                 () -> assertEquals(new Product(2, "Хлеб", 20, 30), products.get(2)),
@@ -34,9 +39,10 @@ class ReadFromFileServiceTest {
                 () -> assertEquals(new Product(5, "Coca-Cola", 35, 10), products.get(5)));
     }
 
+    @DisplayName("сервис должен читать распродажи из файла")
     @Test
     void readSales() {
-        ReadFromFileService.readSales(sales);
+        readFromFileService.readSales(sales);
         int[][] x = new int[2][50];
         x[0][0] = 0;
         x[0][1] = 4;

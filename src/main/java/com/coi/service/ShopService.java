@@ -1,19 +1,19 @@
-package com.coi;
+package com.coi.service;
 
 import com.coi.domain.Customer;
 import com.coi.domain.Product;
 import com.coi.domain.Sale;
-import com.coi.utils.ReadFromFileService;
+import com.coi.service.ReadFromFileService;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Shop {
-    static HashMap<Integer, Customer> customers = new HashMap<>();
-    static HashMap<Integer, Product> products = new HashMap<>();
-    static HashMap<Integer, Sale> sales = new HashMap<>();
+public class ShopService {
+    private HashMap<Integer, Customer> customers = new HashMap<>();
+    private HashMap<Integer, Product> products = new HashMap<>();
+    private HashMap<Integer, Sale> sales = new HashMap<>();
 
-    public static String sellProduct(int productId, int customerId) {
+    public String sellProduct(int productId, int customerId) {
         // if product or customer doesn't exist
         if(!products.containsKey(productId) || !customers.containsKey(customerId)) {
             return "Error!";
@@ -52,7 +52,7 @@ public class Shop {
         return "OK";
     }
 
-    private static void printCustomersInfo() {
+    public void printCustomersInfo() {
         System.out.println("CUSTOMERS");
         customers.entrySet().stream().forEach(c -> {
             System.out.println("____________________________________");
@@ -62,7 +62,7 @@ public class Shop {
         });
     }
 
-    private static void printCustomerInfo(int customerId) {
+    public void printCustomerInfo(int customerId) {
         if(customers.containsKey(customerId)) {
             System.out.println("CUSTOMER " + customerId);
             Customer c = customers.get(customerId);
@@ -73,7 +73,7 @@ public class Shop {
         }
     }
 
-    private static void printGoodsInfo() {
+    public void printGoodsInfo() {
         System.out.println("GOODS:");
         products.entrySet().stream().forEach(c -> {
             System.out.println("____________________________________");
@@ -83,7 +83,7 @@ public class Shop {
         });
     }
 
-    private static void printGoodInfo(int productId) {
+    public void printGoodInfo(int productId) {
         if(products.containsKey(productId)) {
             System.out.println("Product " + productId);
             Product p = products.get(productId);
@@ -94,30 +94,27 @@ public class Shop {
         }
     }
 
+    public HashMap<Integer, Customer> getCustomers() {
+        return customers;
+    }
 
-    public static void main(String[] args) {
-        // read files
-        ReadFromFileService.readCustomers(customers);
-        ReadFromFileService.readProducts(products);
-        ReadFromFileService.readSales(sales);
+    public void setCustomers(HashMap<Integer, Customer> customers) {
+        this.customers = customers;
+    }
 
-        printCustomerInfo(1);
-        printGoodInfo(1);
-        printGoodInfo(3);
-        // do something
-        System.out.println(sellProduct(1, 1));
-        System.out.println(sellProduct(3, 1));
-        System.out.println(sellProduct(3, 1));
-        System.out.println(sellProduct(3, 1));
-        System.out.println(sellProduct(3, 1));
-        System.out.println(sellProduct(3, 1));
-        System.out.println(sellProduct(3, 1));
-        System.out.println(sellProduct(1, 1));
-        System.out.println(sellProduct(1, 1));
-        System.out.println(sellProduct(1, 1));
+    public HashMap<Integer, Product> getProducts() {
+        return products;
+    }
 
-        printCustomerInfo(1);
-        printGoodInfo(1);
-        printGoodInfo(3);
+    public void setProducts(HashMap<Integer, Product> products) {
+        this.products = products;
+    }
+
+    public HashMap<Integer, Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(HashMap<Integer, Sale> sales) {
+        this.sales = sales;
     }
 }

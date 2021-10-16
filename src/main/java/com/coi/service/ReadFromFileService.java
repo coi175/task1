@@ -1,4 +1,4 @@
-package com.coi.utils;
+package com.coi.service;
 
 import com.coi.domain.Customer;
 import com.coi.domain.Product;
@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 public final class ReadFromFileService {
     private static final String PATH = "src/main/resources/";
 
-    public static void readCustomers(HashMap<Integer, Customer> customers) {
+    public void readCustomers(HashMap<Integer, Customer> customers) {
         try (Stream<String> stream = Files.lines(Paths.get(PATH + "customers.txt"))) {
             stream.forEach(k -> {
                 String [] values = k.split(" ");
@@ -25,7 +25,7 @@ public final class ReadFromFileService {
         }
     }
 
-    public static void readProducts(HashMap<Integer, Product> products) {
+    public void readProducts(HashMap<Integer, Product> products) {
         try (Stream<String> stream = Files.lines(Paths.get(PATH + "goods.txt"))) {
             stream.forEach(k -> {
                 String [] values = k.split(" ");
@@ -37,7 +37,7 @@ public final class ReadFromFileService {
         }
     }
 
-    public static void readSales(HashMap<Integer, Sale> sales) {
+    public void readSales(HashMap<Integer, Sale> sales) {
         try (Stream<String> stream = Files.lines(Paths.get(PATH + "sales.txt"))) {
             stream.forEach(k -> {
                 String [] values = k.split(" ");
